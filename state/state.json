@@ -1,0 +1,20 @@
+{
+  "vpc_id": "vpc-547828e0",
+  "vpc_name": "dev-vpc",
+  "public-subnet-az1": "subnet-1ead48a2",
+  "public-subnet-az2": "subnet-c92c12e3",
+  "private-subnet-az1": "subnet-95816d42",
+  "private-subnet-az2": "subnet-48bac294",
+  "igw_id": "igw-687dff55",
+  "public_rt_id": "rtb-a78530f8",
+  "public-subnet-az1_rt_assoc": "rtbassoc-b1d4ddef",
+  "public-subnet-az2_rt_assoc": "rtbassoc-31998a6b",
+  "private_rt_id": "rtb-b774d2ee",
+  "private-subnet-az1_rt_assoc": "rtbassoc-c1544703",
+  "private-subnet-az2_rt_assoc": "rtbassoc-5ceef252",
+  "nat_eip_alloc_id": "eipalloc-b250f7cc43bb0e28b",
+  "nat_id": "nat-5de57a8ee1afa04bb",
+  "private_nat_route": true,
+  "sg_dev-web-sg": "sg-07430e2eff1eb9552",
+  "ec2_instance_id": "i-3a3ccfd98d2ffa625"
+}

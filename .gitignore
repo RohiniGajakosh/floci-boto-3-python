@@ -10,7 +10,7 @@ __pycache__/
 2026-*.md
 
 # State files
-state/
+#state/
 
 # Notebooks
 #*.ipynb
