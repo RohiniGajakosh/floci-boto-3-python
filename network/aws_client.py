@@ -23,7 +23,7 @@ def get_session(region_name="ap-south-1"):
 
 def get_client(service_name, region_name="ap-south-1"):
   if USE_LOCALSTACK:
-    #Dial localstack floci in tead of calling AWs
+    #Dial localstack floci instead of calling AWs
     return get_session(region_name).client(
       service_name,
       endpoint_url=LOCALSTACK_URL
