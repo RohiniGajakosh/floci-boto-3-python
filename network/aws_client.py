@@ -5,7 +5,7 @@ _session = None
 
 ##Read the toggle for once
 USE_LOCALSTACK = os.getenv("USE_LOCALSTACK") == "1"
-LOCALSTACK_URL = os.getenv("LOCALSTACK_URL", "http://192.168.1.30:4566")
+LOCALSTACK_URL = os.getenv("LOCALSTACK_URL", "http://localhost:4566")
 
 def get_session(region_name="ap-south-1"):
     global _session

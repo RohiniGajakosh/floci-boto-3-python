@@ -1,0 +1,10 @@
+services:
+  floci:
+    image: floci/floci:latest # Adjust to your specific Floci image name if different
+    ports:
+      - "4566:4566"
+    environment:
+      - PERSISTENCE=1
+    volumes:
+      - "./floci-data:/var/lib/floci"
+      - "/var/run/docker.sock:/var/run/docker.sock"
