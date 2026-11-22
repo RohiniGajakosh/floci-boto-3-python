@@ -14,3 +14,8 @@ __pycache__/
 
 # Notebooks
 #*.ipynb
+
+#Key
+
+/keys
+*.pem

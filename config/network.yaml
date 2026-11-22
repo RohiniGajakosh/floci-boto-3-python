@@ -62,6 +62,7 @@ ec2:
   instance_type: "t2.micro"
   subnet: "public-subnet-az1"
   security_group: "dev-web-sg"
+  key_name: "dev-key"
 
 tags:
    ManagedBy: "PythonIAC"

@@ -299,6 +299,10 @@ def generate_plan(config):
             })
     return plan
 
+    #----Ec2 check----
+    # for ec2_instance_id in confid['ec2_instance_id']:
+    #     if ec2_
+
 
 # ==================== DISPLAY ====================
 

@@ -8,6 +8,7 @@
 import sys
 import yaml
 import time
+import os
 
 from network.planner import generate_plan, display_plan, load_config
 from network.vpc import create_vpc
@@ -89,19 +90,29 @@ def command_destroy(config):
 
 
     #===== Step 0: "Terminate EC2"=========
-    if "ec2_instance_id" in state:
-        print("----Terminate EC2 Instance------")
-        instance_id = state["ec2_instance_id"]
+    if 'ec2_instance_id' in state:
+        print("====== Terminate EC2 Instance ======")
+        instance_id = state['ec2_instance_id']
         try:
             ec2.terminate_instances(InstanceIds=[instance_id])
-            print(f"  Waiting for {instance_id} to terminate...")
+            print(f". Waiting for {instance_id} to terminate...")
             ec2.get_waiter('instance_terminated').wait(InstanceIds=[instance_id])
+            del state['ec2_instance_id']
+            save_state(state)            
         except Exception as e:
-            print(f"  EC2 already gone or couldn't terminate: {e}")
-        del state["ec2_instance_id"]
-        save_state(state)
-        print("  EC2 instance terminated.")
-
+            print (f" EC2 already gone or coudn't terminate: {e}")
+               
+    #========step : Delete KeyPair ==========
+    if 'key_pair_name' in state:
+        print("====== Delete Key Pair ======")
+        key_name = state['key_pair_name']
+        try:
+            ec2.delete_key_pair(KeyName=key_name)
+            os.remove(os.path.join("keys",f"{key_name}.pem")) 
+            del state['key_pair_name']
+            save_state(state)
+        except Exception as e:
+            print(f"Key_Pair already gone or couldnt delete: {e}")
     # ===== Step 1: Delete NAT Gateway =====
     if 'nat_id' in state:
         print("===== Destroying NAT Gateway =====")
