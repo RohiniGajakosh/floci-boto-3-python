@@ -5,6 +5,7 @@ services:
       - "4566:4566"
     environment:
       - PERSISTENCE=1
+      - FLOCI_DEFAULT_REGION=ap-south-1
     volumes:
       - "./floci-data:/var/lib/floci"
       - "/var/run/docker.sock:/var/run/docker.sock"
