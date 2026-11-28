@@ -6,7 +6,7 @@ from network.state import load_state, save_state
 
 def create_key_pair(config):
     # Get client and load the state
-    ec2 = get_client("ec2", config)
+    ec2 = get_client("ec2")
     state = load_state()
 
     key_name = config["ec2"]["key_name"]

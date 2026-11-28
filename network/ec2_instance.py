@@ -1,5 +1,8 @@
+from pathlib import Path
+
 from network.aws_client import get_client
 from network.state import load_state, save_state
+
 
 def create_ec2_instance(config):
     """Launch an EC2 instance if it doesn't already exsist."""
@@ -8,6 +11,9 @@ def create_ec2_instance(config):
     tags = config['tags']
     ec2_config = config['ec2']
 
+    key_name = ec2_config["key_name"]
+    if state.get("key_pair_name") != key_name:
+        raise RuntimeError(f"Key Pair {key_name!r} has not been created")
     instance_name = ec2_config['name']
     ami_id = ec2_config['ami_id']
     instance_type = ec2_config['instance_type']
@@ -23,15 +29,18 @@ def create_ec2_instance(config):
     # translate names -> IDs from state
     subnet_id = state[subnet_name]
     sg_id = state[f"sg_{sg_name}"]
+    user_data = (Path(__file__).resolve().parent.parent / "userdata.sh").read_text()
 
     # --------------- Launch the instance ---------------
     response = ec2.run_instances(
+        KeyName=key_name,
         ImageId=ami_id,
         InstanceType=instance_type,
         SubnetId=subnet_id,
         SecurityGroupIds=[sg_id],
         MinCount=1,
-        MaxCount=1
+        MaxCount=1,
+        UserData=user_data,
     )
 
     instance_id = response['Instances'][0]['InstanceId']
